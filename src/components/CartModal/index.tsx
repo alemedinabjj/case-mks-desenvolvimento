@@ -83,6 +83,7 @@ const CartModal = () => {
           </h2>
           <button
             type="button"
+            aria-label="Fechar carrinho"
             onClick={() => {
               closeModal();
             }}
@@ -104,6 +105,7 @@ const CartModal = () => {
                 <S.ProductActions>
                   <button
                     type="button"
+                    className="decrement"
                     aria-label="Remover produto"
                     onClick={() => {
                       dispatch(decrement(product));
@@ -114,6 +116,7 @@ const CartModal = () => {
                   <span>{product.quantity}</span>
                   <button
                     type="button"
+                    className="increment"
                     aria-label="Adicionar produto"
                     onClick={() => {
                       dispatch(increment(product));

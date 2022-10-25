@@ -148,8 +148,34 @@ export const ProductActions = styled.div`
     align-items: center;
     justify-content: center;
     padding: 0.3rem;
-    border-right: 1px solid var(--bg-color);
-    border-left: 1px solid var(--bg-color);
+    /* border-right: 1px solid var(--bg-color);
+    border-left: 1px solid var(--bg-color); */
+  }
+
+  .decrement {
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 1px;
+      height: 1.25rem;
+      background: var(--bg-color);
+      left: 15px;
+    }
+  }
+
+  .increment {
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 1px;
+      height: 1.25rem;
+      background: var(--bg-color);
+      right: 16px;
+    }
   }
 `;
 
