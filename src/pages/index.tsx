@@ -1,7 +1,7 @@
 import { GetStaticProps } from "next";
 import { api } from "../services/api";
 import Card from "../components/Card";
-import * as S from "./styles";
+import * as S from "../styles/Home";
 
 interface IProduct {
   products: {
