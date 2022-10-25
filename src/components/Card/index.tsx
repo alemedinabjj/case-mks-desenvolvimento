@@ -28,7 +28,7 @@ const Card = ({ products }: IProduct) => {
     const product = products.find((item: { id: number }) => item.id === id);
     if (product) {
       dispatch(increment(product));
-      toast.success("Produto adicionado ao carrinho!", {
+      toast.success(`${product.name} adicionado ao carrinho!`, {
         position: "top-right",
         autoClose: 2000,
         hideProgressBar: false,

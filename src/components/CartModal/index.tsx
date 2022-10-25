@@ -1,6 +1,6 @@
 import * as S from "./styles";
 import { FiX } from "react-icons/fi";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useCart } from "../../contexts/CartProvider";
 import { useSelector, useDispatch } from "react-redux";
 import { FormatPrice } from "../../utils/FormatPrice";
@@ -42,13 +42,12 @@ const CartModal = () => {
     const product = cart.find((item) => item.id === id);
     if (product) {
       dispatch(remove(product));
-      toast.error("Produto removido do carrinho!", {
+      toast.error(`${product.name} removido do carrinho!`, {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
-
         draggable: true,
         progress: undefined,
         theme: "light",
@@ -56,12 +55,14 @@ const CartModal = () => {
     }
   };
 
-  useEffect(() => {
-    let value = 0;
-    for (let i = 0; i < cart.length; i++) {
-      value += Number(cart[i].price);
-    }
+  useMemo(() => {
+    const value = cart.reduce((acc, item) => {
+      return acc + Number(item.price);
+    }, 0);
+
     setFinalPrice(value);
+
+    return value;
   }, [cart]);
 
   useEffect(() => {

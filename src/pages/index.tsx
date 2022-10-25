@@ -2,10 +2,11 @@ import { GetStaticProps } from "next";
 import { api } from "../services/api";
 import Card from "../components/Card";
 import * as S from "../styles/Home";
+import { IDataProps } from "../types/IDataProps";
 
 interface IProduct {
   products: {
-    map(arg0: (product: any) => JSX.Element): unknown;
+    map(arg0: (product: IDataProps) => JSX.Element): unknown;
     id: number;
     name: string;
     brand: string;
@@ -15,16 +16,6 @@ interface IProduct {
     updateAt: string;
     find: any;
   };
-}
-
-interface IPropsProduct {
-  id: number;
-  name: string;
-  brand: string;
-  description: string;
-  price: number;
-  photo: string;
-  updateAt: string;
 }
 
 const Home = ({ products }: IProduct) => {
@@ -42,7 +33,7 @@ export default Home;
 export const getStaticProps: GetStaticProps = async () => {
   const { data } = await api.get("/products?page=1&rows=12&sortBy=name&orderBy=DESC");
 
-  const products = data.products.map((product: IPropsProduct) => {
+  const products = data.products.map((product: IDataProps) => {
     return {
       id: product.id,
       name: product.name,
