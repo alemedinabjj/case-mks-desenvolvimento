@@ -10,6 +10,11 @@ export const CardContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+
+  @media (max-width: 768px) {
+    width: 19.875rem;
+    max-width: 100%;
+  }
 `;
 
 export const CardContent = styled.div`
