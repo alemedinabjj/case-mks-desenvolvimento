@@ -4,7 +4,6 @@ import { FormatPrice } from "../../utils/FormatPrice";
 import Head from "next/head";
 import { increment } from "../../storage/CartItems";
 import { useDispatch } from "react-redux";
-import { useState } from "react";
 import { toast } from "react-toastify";
 
 interface IProduct {
@@ -45,26 +44,27 @@ const Card = ({ products }: IProduct) => {
       <Head>
         <title>MKS | Produtos</title>
       </Head>
-      {products.map((product) => (
-        <S.CardContainer key={product.id}>
-          <S.CardContent>
-            <S.CardImage>
-              <Image src={product.photo} alt={product.name} width={200} height={200} />
-            </S.CardImage>
-            <S.CardTitle>
-              <h2>{product.name}</h2>
-              <span>{FormatPrice(product.price)}</span>
-            </S.CardTitle>
-            <S.CardDescription>
-              <p>{product.description}</p>
-            </S.CardDescription>
-          </S.CardContent>
-          <S.CardButton onClick={() => handleAddProduct(product.id)} type="button" aria-label="Adicionar ao carrinho">
-            <Image src="/comprar.svg" alt="comprar" width={15} height={15} />
-            <span>Comprar</span>
-          </S.CardButton>
-        </S.CardContainer>
-      ))}
+      {products &&
+        products.map((product) => (
+          <S.CardContainer key={product.id}>
+            <S.CardContent>
+              <S.CardImage>
+                <Image src={product.photo} alt={product.name} width={200} height={200} objectFit="cover" />
+              </S.CardImage>
+              <S.CardTitle>
+                <h2>{product.name}</h2>
+                <span>{FormatPrice(product.price)}</span>
+              </S.CardTitle>
+              <S.CardDescription>
+                <p>{product.description}</p>
+              </S.CardDescription>
+            </S.CardContent>
+            <S.CardButton onClick={() => handleAddProduct(product.id)} type="button" aria-label="Adicionar ao carrinho">
+              <Image src="/comprar.svg" alt="comprar" width={15} height={15} />
+              <span>Comprar</span>
+            </S.CardButton>
+          </S.CardContainer>
+        ))}
     </>
   );
 };

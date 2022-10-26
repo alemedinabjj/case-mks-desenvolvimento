@@ -4,3 +4,7 @@ export const FormatPrice = (price: number) => {
     currency: "BRL",
   }).format(price);
 };
+
+//testing jest and react testing library
+
+// Path: src/__tests__/FormatPrice.test.ts

@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormatPrice should be able to format price 1`] = `"R$ 1.000,00"`;
