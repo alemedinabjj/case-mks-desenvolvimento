@@ -4,14 +4,14 @@ import { useEffect, useState, useMemo } from "react";
 import { useCart } from "../../contexts/CartProvider";
 import { useSelector, useDispatch } from "react-redux";
 import { FormatPrice } from "../../utils/FormatPrice";
+import { ItemModal } from "../ItemModal";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { RootState } from "../../storage";
-import { decrement, increment, remove, finalizePurchase } from "../../storage/CartItems";
+import { remove, finalizePurchase } from "../../storage/CartItems";
 import { IDataProps } from "../../types/IDataProps";
-import Image from "next/image";
 
 import { BsFillCartXFill } from "react-icons/bs";
 
@@ -94,53 +94,7 @@ const CartModal = () => {
         </S.Header>
         <S.Content>
           {cart.length > 0 ? (
-            cart.map((product: IDataProps) => (
-              <S.Product key={product.id}>
-                <S.ProductImage>
-                  <Image src={product.photo} alt={product.name} width={46} height={57} objectFit="cover" />
-                </S.ProductImage>
-                <S.ProductInfo>
-                  <h3>{product.name}</h3>
-                  <span>{product.brand}</span>
-                </S.ProductInfo>
-                <S.ProductActions>
-                  <button
-                    type="button"
-                    className="decrement"
-                    aria-label="Remover produto"
-                    onClick={() => {
-                      dispatch(decrement(product));
-                    }}
-                  >
-                    -
-                  </button>
-                  <span>{product.quantity}</span>
-                  <button
-                    type="button"
-                    className="increment"
-                    aria-label="Adicionar produto"
-                    onClick={() => {
-                      dispatch(increment(product));
-                    }}
-                  >
-                    +
-                  </button>
-                </S.ProductActions>
-                <S.ProductPrice>
-                  <span>{FormatPrice(Number(product.price))}</span>
-                </S.ProductPrice>
-
-                <S.ProductRemove
-                  type="button"
-                  aria-label="Remover produto"
-                  onClick={() => {
-                    handleRemove(product.id);
-                  }}
-                >
-                  <FiX />
-                </S.ProductRemove>
-              </S.Product>
-            ))
+            cart.map((product: IDataProps) => <ItemModal key={product.id} product={product} handleRemove={handleRemove} />)
           ) : (
             <S.EmptyCart>
               <h2>Seu carrinho está vazio</h2>
